@@ -1,0 +1,40 @@
+import { ObjectId } from "bson";
+import { client } from "../db.js";
+
+export function getAllStudents(req) {
+    return client
+        .db("student-and-mentors")
+        .collection("students")
+        .find(req.query)
+        .toArray();
+}
+
+export function getStudentById(id) {
+    return client
+        .db("student-and-mentors")
+        .collection("students")
+        .findOne({ _id: new ObjectId(id) });
+}
+
+export function addStudentData(data) {
+    return client
+        .db("student-and-mentors")
+        .collection("students")
+        .insertOne(data);
+}
+
+export function updateStudentData(id, updatedData) {
+    return client
+        .db("student-and-mentors")
+        .collection("students")
+        .findOneAndUpdate({ _id: new ObjectId(id) }, { $set: updatedData });
+}
+
+
+
+export function deleteStudentData(id) {
+    return client
+        .db("student-and-mentors")
+        .collection("students")
+        .deleteOne({ _id: new ObjectId(id) });
+}

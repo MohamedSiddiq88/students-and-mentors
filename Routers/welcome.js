@@ -33,7 +33,7 @@ router.get("/", (req, res) => {
             }
             
             .container {
-              max-width: 600px;
+              max-width: 80%;
               margin: 0 auto;
             }
             

@@ -37,12 +37,23 @@ router.get("/", (req, res) => {
           <h1>Welcome to the Students and Mentors Data Portal</h1>
           <p>Click <a href="/mentors/all">here</a> to view all Mentors data.</p>
           <p>Click <a href="/students/all">here</a> to view all student data.</p>
+
           <br></br><p>Endpoint to add a mentor: <code>/mentors/add</code></p>
-          <p>Endpoint to add a student: <code>/students/add</code></p>
-          <p>Endpoint to assign a mentor to students by batch: <code>/students/assign-mentor-by-batch/:mentorId</code></p>
-          <p>Endpoint to assign a mentor to a student: <code>/students/assign-mentor/:studentId</code></p>
-          <p>Endpoint to show all students for a particular mentor: <code>/students/filtered-by-mentor/:mentorId</code></p>
-          <p>Endpoint to show previously assigned mentor for a particular student: <code>/students/previous-mentor/:studentId</code></p>
+          <p>Description: you should include the details of the new mentor in the request body<p>
+
+          <br></br><p>Endpoint to add a student: <code>/students/add</code></p>
+          <p>Description: you should include the details of the new student in the request body<p>
+
+          <br></br><p>Endpoint to assign a mentor to students by batch: <code>/students/assign-mentor-by-batch/:mentorId</code></p>
+          <p>Description: you should include the batch in the request body<p>
+
+          <br></br><p>Endpoint to assign a mentor to a student: <code>/students/assign-mentor/:studentId</code></p>
+          <p>Description: you should include the mentorId in the request body<p>
+          
+          <br></br><p>Endpoint to show all students for a particular mentor: <code>/students/filtered-by-mentor/:mentorId</code></p>
+          
+
+          <br></br><p>Endpoint to show previously assigned mentor for a particular student: <code>/students/previous-mentor/:studentId</code></p>
           <p>Feel free to explore other pages.</p>
         </body>
       </html>

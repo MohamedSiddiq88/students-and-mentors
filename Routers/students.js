@@ -47,6 +47,19 @@ router.post("/add", async (req, res) => {
     }
 });
 
+router.post("/addmany", async (req, res) => {
+    try {
+      const newStudents = req.body;
+      if (!newStudents || !Array.isArray(newStudents)) {
+        return res.status(400).send({ data: "No student details provided" });
+      }
+      const result = await addStudentsData(newStudents);
+      res.status(200).send({ data: { result: result, message: "New students added successfully" } });
+    } catch (error) {
+      res.status(500).send({ data: "Internal server error" });
+    }
+  });
+
 router.put("/assign-mentor/:studentId", async (req, res) => {
     try {
         const { studentId } = req.params;

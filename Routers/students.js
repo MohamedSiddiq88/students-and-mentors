@@ -5,14 +5,7 @@ import { getMentorById } from "../Controllers/mentors.js";
 const router = express.Router();
 
 
-router.get("/",(req,res)=>{
-    const htmlContent = `
-    <h1>Welcome to the Students and Mentors Data Portal</h1>
-    <p>Click <a href="/students/all">here</a> to view all student data.</p>
-    <p>Feel free to explore other pages.</p>
-  `;
-  res.send(htmlContent);
-})
+
 
 router.get("/all", async (req, res) => {
     try {

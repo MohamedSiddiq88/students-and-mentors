@@ -4,7 +4,6 @@ import { getMentorById } from "../Controllers/mentors.js";
 
 const router = express.Router();
 
-
 router.get("/", (req, res) => {
     const htmlContent = `
       <html>
@@ -17,6 +16,7 @@ router.get("/", (req, res) => {
             
             h1 {
               color: #333;
+              text-align: center;
             }
             
             p {
@@ -31,35 +31,63 @@ router.get("/", (req, res) => {
             a:hover {
               text-decoration: underline;
             }
+            
+            .container {
+              max-width: 600px;
+              margin: 0 auto;
+            }
+            
+            .endpoint {
+              background-color: #f9f9f9;
+              border: 1px solid #ccc;
+              padding: 10px;
+              margin-bottom: 20px;
+            }
+            
+            .code {
+              background-color: #eee;
+              padding: 5px;
+            }
           </style>
         </head>
         <body>
-          <h1>Welcome to the Students and Mentors Data Portal</h1>
-          <p>Click <a href="/mentors/all">here</a> to view all Mentors data.</p>
-          <p>Click <a href="/students/all">here</a> to view all student data.</p>
+          <div class="container">
+            <h1>Welcome to the Students and Mentors Data Portal</h1>
+            <p>Click <a href="/mentors/all">here</a> to view all Mentors data.</p>
+            <p>Click <a href="/students/all">here</a> to view all student data.</p>
 
-          <br></br><p>Endpoint to add a mentor: <code>/mentors/add</code></p>
-          <p>Description: you should include the details of the new mentor in the request body<p>
+            <div class="endpoint">
+              <p>1. Endpoint to add a mentor: <span class="code">/mentors/add</span></p>
+              <p>Description: you should include the details of the new mentor in the request body</p>
+            </div>
 
-          <br></br><p>Endpoint to add a student: <code>/students/add</code></p>
-          <p>Description: you should include the details of the new student in the request body<p>
+            <div class="endpoint">
+              <p>2. Endpoint to add a student: <span class="code">/students/add</span></p>
+              <p>Description: you should include the details of the new student in the request body</p>
+            </div>
 
-          <br></br><p>Endpoint to assign a mentor to students by batch: <code>/students/assign-mentor-by-batch/:mentorId</code></p>
-          <p>Description: you should include the batch in the request body<p>
+            <div class="endpoint">
+              <p>3. Endpoint to assign a mentor to students by batch: <span class="code">/students/assign-mentor-by-batch/:mentorId</span></p>
+              <p>Description: you should include the batch in the request body</p>
+            </div>
 
-          <br></br><p>Endpoint to assign a mentor to a student: <code>/students/assign-mentor/:studentId</code></p>
-          <p>Description: you should include the mentorId in the request body<p>
-          
-          <br></br><p>Endpoint to show all students for a particular mentor: <code>/students/filtered-by-mentor/:mentorId</code></p>
-          
+            <div class="endpoint">
+              <p>4. Endpoint to assign a mentor to a student: <span class="code">/students/assign-mentor/:studentId</span></p>
+              <p>Description: you should include the mentorId in the request body</p>
+            </div>
+            
+            <div class="endpoint">
+              <p>5. Endpoint to show all students for a particular mentor: <span class="code">/students/filtered-by-mentor/:mentorId</span></p>
+            </div>
 
-          <br></br><p>Endpoint to show previously assigned mentor for a particular student: <code>/students/previous-mentor/:studentId</code></p>
-          <p>Feel free to explore other pages.</p>
+            <div class="endpoint">
+              <p>6. Endpoint to show previously assigned mentor for a particular student: <span class="code">/students/previous-mentor/:studentId</span></p>
+            </div>
+          </div>
         </body>
       </html>
     `;
     res.send(htmlContent);
-  });
-  
+});
 
 export const welcomeRouter = router;

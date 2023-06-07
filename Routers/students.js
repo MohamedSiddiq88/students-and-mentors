@@ -1,5 +1,5 @@
 import express from "express";
-import { addStudentData, deleteStudentData, getAllStudents, getStudentById, updateStudentData } from "../Controllers/students.js";
+import { addStudentData, addStudentsData, deleteStudentData, getAllStudents, getStudentById, updateStudentData } from "../Controllers/students.js";
 import { getMentorById } from "../Controllers/mentors.js";
 
 const router = express.Router();
@@ -44,7 +44,7 @@ router.post("/add", async (req, res) => {
         res.status(200).send({ data: { result: result, message: "New student added successfully" } });
     } catch (error) {
         res.status(500).send({ data: "Internal server error" });
-    }
+    }   
 });
 
 router.post("/addmany", async (req, res) => {

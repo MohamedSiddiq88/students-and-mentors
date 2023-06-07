@@ -1,7 +1,7 @@
 import express from "express";
 import dotenv from "dotenv"
 import { mentorsRouter } from "./Routers/mentors.js";
-import { studentsRouter } from "./Routers/Students.js";
+import { studentsRouter } from "./Routers/students.js";
 
 // configure the envirenment
 dotenv.config()

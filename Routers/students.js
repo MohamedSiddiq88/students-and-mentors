@@ -1,5 +1,5 @@
 import express from "express";
-import { addStudentData, addStudentsData, deleteStudentData, getAllStudents, getStudentById, updateStudentData } from "../Controllers/students.js";
+import { addStudentData, addStudentsData, deleteStudentData, getAllStudents, getFilteredStudents, getStudentById, updateStudentData } from "../Controllers/students.js";
 import { getMentorById } from "../Controllers/mentors.js";
 
 const router = express.Router();
@@ -82,8 +82,16 @@ router.put("/assign-mentor/:studentId", async (req, res) => {
             return res.status(404).json({ error: "Mentor not found" });
         }
 
+        let previousMentor="";
+        let previousMentorId="";
+
+        if(student.mentor!==""){
+            previousMentor=student.mentor;
+            previousMentorId=student.mentorId;
+        }
+
         // Update the student with the new mentor
-        const updatedData = { mentorId: mentorId, mentor: mentor.name };
+        const updatedData = { mentorId: mentorId, mentor: mentor.name, previousMentor: previousMentor, previousMentorId:previousMentorId};
 
         const result = await updateStudentData(studentId, updatedData);
 
@@ -118,9 +126,9 @@ router.put("/assign-mentor-by-batch/:mentorId", async (req, res) => {
         }
 
         // Retrieve the students with the specified batch and no mentor assigned
-        const students = await getAllStudents({ batch: batch, mentor: "" });
+        const students = await getFilteredStudents({ batch: batch, mentor: "" });
 
-        if (students.length) {
+        if (!(students.length)) {
             return res.status(404).json({ error: "Already assigned" })
         }
 
@@ -146,7 +154,7 @@ router.get("/filtered-by-mentor/:mentorId", async (req, res) => {
         if (!mentorId) {
             return res.status(400).json({ error: "no data provided" });
         }
-        const result = await getAllStudents({ mentorId: mentorId });
+        const result = await getFilteredStudents({ mentorId: mentorId });
         res.status(200).json({ data: { result: result } })
     } catch (error) {
         res.status(500).json({ error: "Internal server error" });
@@ -171,13 +179,13 @@ router.get("/previous-mentor/:studentId", async (req, res) => {
 })
 
 
-router.delete("/delete/:id", async (req, res) => {
+router.delete("/delete", async (req, res) => {
     try {
-        const { id } = req.params;
-        if (!id) {
-            return res.status(400).json({ data: "No details provided" });
-        }
-        const result = await deleteStudentData(id);
+        // const { id } = req.params;
+        // if (!id) {
+        //     return res.status(400).json({ data: "No details provided" });
+        // }
+        const result = await deleteStudentData();
         res.status(200).json({ data: { result: result, message: "Deleted successfully" } });
     } catch (error) {
         res.status(500).json({ data: "Internal server error" });
@@ -185,3 +193,30 @@ router.delete("/delete/:id", async (req, res) => {
 });
 
 export const studentsRouter = router;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

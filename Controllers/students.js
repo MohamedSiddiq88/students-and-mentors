@@ -9,6 +9,15 @@ export function getAllStudents(req) {
         .toArray();
 }
 
+export function getFilteredStudents(filter) {
+    return client
+      .db("student-and-mentors")
+      .collection("students")
+      .find({batch:"Hindi batch"})
+      .toArray();
+  }
+  
+
 export function getStudentById(id) {
     return client
         .db("student-and-mentors")
@@ -39,9 +48,9 @@ export function updateStudentData(id, updatedData) {
 
 
 
-export function deleteStudentData(id) {
+export function deleteStudentData() {
     return client
         .db("student-and-mentors")
         .collection("students")
-        .deleteOne({ _id: new ObjectId(id) });
+        .deleteMany({});
 }
